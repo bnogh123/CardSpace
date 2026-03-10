@@ -1,2 +1,23 @@
-default-cards-20260211220907.json
 oracle-cards-20260305100222.json
+
+
+# build output
+build/
+lib/
+bin/
+
+# Compiled objects
+*.o
+*.a
+*.so
+
+# Cmake generated files if they escape build
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Editor
+.cache/
+*.swp
+.DS_Store
