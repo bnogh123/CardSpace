@@ -11,6 +11,7 @@ add_library(cardspace_core
   card_parser.cpp           # deserialises raw Scryfall JSON into Card structs
   transformer.cpp           # cleans / normalises fields (mana cost, legalities…)
   loader.cpp                # writes transformed records to the data warehouse
+  CardType.cpp              # encodes / de-encodes supertype and type typeline
 
   # Data warehouse layer
   warehouse.cpp             # schema management and bulk insert helpers
