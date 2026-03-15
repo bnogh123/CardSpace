@@ -1,14 +1,33 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <optional>
+#include <unordered_map>
 #include "CardType.hpp"
-using namespace std;
 
+// Struct representing the basic information of a card.
+// Notably is naive to the actual stats of the card;
+// more of an abstract class than anything else, seeing how 
 struct Card {
-    string id, name, mana_cost, type_line_raw, oracle_text, 
-           rarity; 
+    std::string id;
+    std::string name;
+    std::string mana_cost;
+    std::string type_line_raw;
+    std::string oracle_text;
+    std::string rarity; 
     double usd_price;
-    vector<string> color;
-    vector<string> color_identity;
-    vector<string> legalities;
+    int cmc;
+    TypeEncoding type;
+    std::vector<std::string> color;
+    std::vector<std::string> color_identity;
+    std::vector<std::string> legalities;
+
+    // optional fields
+    std::optional<uint16_t> power;
+    std::optional<uint16_t> toughness;
+    std::optional<uint16_t> loyalty;
+    std::optional<uint16_t> defense;
+    
+    // unknown/rare fields as a catch-all
+    std::unordered_map<std::string, std::string> extra_fields;
 };
