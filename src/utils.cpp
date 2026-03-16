@@ -1,5 +1,6 @@
 #include "../include/utils.hpp"
 #include <algorithm>
+#include <vector>
 
 std::string to_lower(const std::string& s){
     std::string result = s;
@@ -7,8 +8,29 @@ std::string to_lower(const std::string& s){
     return result;
 }
 
-// takes a uint64 and returns true if
-// the value is prime and false otherwise
+/* Extracts the values x 
+input: s
+encapsulated within two brackets {x}  */
+static std::vector<std::string> extract_braced(const std::string& text) {
+    std::vector<std::string> results;
+    size_t pos = 0;
+
+    while ((pos = text.find('{', pos)) != std::string::npos) {
+        size_t end = text.find('}', pos);
+        if (end == std::string::npos) break;  // malformed, no closing brace
+
+        // extract what's between { and }
+        results.push_back(text.substr(pos + 1, end - pos - 1));
+
+        pos = end + 1;  // move past this } to search for the next {
+    }
+
+    return results;
+}
+
+/* 
+input: value
+returns true if the value is prime and false otherwise */
 bool is_prime (const uint64_t& value) {
     uint16_t cnt = 0;
     bool is_prime;
