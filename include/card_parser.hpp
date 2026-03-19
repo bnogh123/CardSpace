@@ -3,7 +3,9 @@
 #include <vector>
 #include <string>
 
-// input: aggregated string of json file raw_json
-// output:  a massive vector that contains each card 
-//          object and it's relevant encoded subfields
+/** 
+ * @brief Parse the raw string into a vector of the cards
+ * @param raw_json Aggregated string of json file
+ * @return Vector that contains each card object
+*/
 std::vector<Card> parse_cards(const std::string& raw_json);

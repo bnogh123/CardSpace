@@ -6,9 +6,12 @@
 #include "CardType.hpp"
 #include "CardColor.hpp"
 
-// Struct representing the basic information of a card.
-// Notably is naive to the actual stats of the card;
-// more of an abstract class than anything else, seeing how 
+/**
+ * @brief Struct representing the basic information of a card.
+ * 
+ * Notably is naive to the actual stats of the card;
+ * more of an abstract class than anything else, seeing how 
+*/
 struct Card {
     std::string id;
     std::string o_id;
