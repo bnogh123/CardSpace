@@ -1,5 +1,5 @@
 #pragma once
-#include "utils.hpp"
+#include "../include/nlohmann/json.hpp"
 #include <cstdint>
 #include <string>
 
@@ -54,4 +54,16 @@ struct ColorEncoding {
     uint16_t    raw() const;
 };
 
+/**
+  * @brief Encode color encoding from string literal
+  * @param text string containing color symbol text curled in brackets (typically oracle text)
+  * @return ColorEncoding struct representing the colors present
+  */
 ColorEncoding encode_color(const std::string& text);
+
+/**
+  * @brief Encode color encoding from string literal
+  * @param json json object containing a vector of strings, each a single char long representing a color
+  * @return ColorEncoding struct representing the colors present
+  */
+ColorEncoding encode_color(const nlohmann::json& json);

@@ -1,4 +1,5 @@
 #include "../include/CardType.hpp"
+#include "../include/utils.hpp"
 #include <string>
 #include <unordered_map>
 #include <sstream>

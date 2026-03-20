@@ -46,11 +46,30 @@ bool ColorEncoding::is_multicolor() const{
 }
 
 /* input: string text
-returns the relevant applicable colorencoding*/
+returns the relevant applicable colorencoding */
 ColorEncoding encode_color(const std::string& color_text){
     ColorEncoding result;    // starts with value = 1
     std::vector<std::string> extracted;
     extracted = extract_braced(color_text);
+      
+/*  word is one token at a time
+    loop exits automatically when vector is exhausted
+    3. for each word, look up in map and call result.add()  */
+    for(std::string word : extracted) {
+        auto found = colors.find(to_lower(word));
+
+        if (found != colors.end()) {
+            result.add(found->second);
+        }
+    }
+
+    return result;
+}
+
+ColorEncoding encode_color(const nlohmann::json& json){
+    ColorEncoding result;    // starts with value = 1
+    std::vector<std::string> extracted;
+    extracted = json.get<std::vector<std::string>>();
       
 /*  word is one token at a time
     loop exits automatically when vector is exhausted

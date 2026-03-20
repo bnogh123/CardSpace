@@ -15,7 +15,7 @@ std::string to_lower(const std::string& s);
   * @param text String to check for braced brackets (passed by reference)
   * @return Vector of strings enclosed within braced brackets (in order of occurence)
   */
-static std::vector<std::string> extract_braced(const std::string& text);
+std::vector<std::string> extract_braced(const std::string& text);
 
 /**
   * @brief Return True iff a value is a prime number

@@ -11,7 +11,7 @@ std::string to_lower(const std::string& s){
 /* Extracts the values x 
 input: s
 encapsulated within two brackets {x}  */
-static std::vector<std::string> extract_braced(const std::string& text) {
+std::vector<std::string> extract_braced(const std::string& text) {
     std::vector<std::string> results;
     size_t pos = 0;
 

@@ -1,5 +1,6 @@
 #include "../include/card_parser.hpp"
 #include "../include/nlohmann/json.hpp"
+#include <cstdint>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -31,6 +32,8 @@ static const std::unordered_map<std::string, uint16_t> layouts = {
     {"saga",       5},
     {"split",      2},
     {"transform",  4}
+
+
 };
 
 // ============================================================
@@ -63,8 +66,8 @@ Card parse_oracle_card(const nlohmann::json& element) {
     card.type          = encode_type_line(card.type_line_raw);
     card.color         = encode_color(element["colors"]);
     card.color_identity = encode_color(element["color_identity"]);
-    // TODO: card.legalities  = parse_legalities(element["legalities"]);
-    // TODO: card.keywords    = element["keywords"].get<std::vector<std::string>>();
+    card.legalities  = encode_legalities(element["legalities"]);
+    card.keywords    = element["keywords"].get<std::vector<std::string>>();
 
     // --- optional gameplay stats ---
     if (element.contains("power"))
@@ -82,33 +85,33 @@ Card parse_oracle_card(const nlohmann::json& element) {
 PrintedCard parse_printed_card(const nlohmann::json& element) {
     PrintedCard card;
     // --- guaranteed printing fields ---
-    card.id      = element["id"].get<std::string>();
-    card.o_id    = element["oracle_id"].get<std::string>();
+    card.id                 = element["id"].get<std::string>();
+    card.o_id               = element["oracle_id"].get<std::string>();
     card.rarity  = parse_rarity(element["rarity"].get<std::string>());
     card.layout  = parse_layout(element["layout"].get<std::string>());
-    // TODO: card.usd_price       = element["prices"]["usd"].get<double>();
-    // TODO: card.set             = element["set"].get<std::string>();
-    // TODO: card.set_name        = element["set_name"].get<std::string>();
-    // TODO: card.collector_number = element["collector_number"].get<std::string>();
-    // TODO: card.artist          = element["artist"].get<std::string>();
-    // TODO: card.border_color    = element["border_color"].get<std::string>();
-    // TODO: card.frame           = element["frame"].get<std::string>();
-    // TODO: card.released_at     = element["released_at"].get<std::string>();
+    card.usd_price          = element["prices"]["usd"].get<double>();
+    card.set                = element["set"].get<std::string>();
+    card.set_name           = element["set_name"].get<std::string>();
+    card.collector_number   = element["collector_number"].get<std::string>();
+    card.artist             = element["artist"].get<std::string>();
+    card.border_color       = element["border_color"].get<std::string>();
+    card.frame              = element["frame"].get<std::string>();
+    card.released_at        = element["released_at"].get<std::string>();
 
     // --- boolean printing flags ---
-    // TODO: card.foil            = element["foil"].get<bool>();
-    // TODO: card.nonfoil         = element["nonfoil"].get<bool>();
-    // TODO: card.oversized       = element["oversized"].get<bool>();
-    // TODO: card.full_art        = element["full_art"].get<bool>();
-    // TODO: card.textless        = element["textless"].get<bool>();
-    // TODO: card.promo           = element["promo"].get<bool>();
-    // TODO: card.reprint         = element["reprint"].get<bool>();
-    // TODO: card.digital         = element["digital"].get<bool>();
-    // TODO: card.booster         = element["booster"].get<bool>();
-    // TODO: card.reserved        = element["reserved"].get<bool>();
-    // TODO: card.variation       = element["variation"].get<bool>();
-    // TODO: card.game_changer    = element["game_changer"].get<bool>();
-    // TODO: card.story_spotlight = element["story_spotlight"].get<bool>();
+    card.foil               = element["foil"].get<bool>();
+    card.oversized          = element["oversized"].get<bool>();
+    card.nonfoil            = element["nonfoil"].get<bool>();
+    card.full_art           = element["full_art"].get<bool>();
+    card.textless           = element["textless"].get<bool>();
+    card.promo              = element["promo"].get<bool>();
+    card.reprint            = element["reprint"].get<bool>();
+    card.digital            = element["digital"].get<bool>();
+    card.booster            = element["booster"].get<bool>();
+    card.reserved           = element["reserved"].get<bool>();
+    card.variation          = element["variation"].get<bool>();
+    card.game_changer       = element["game_changer"].get<bool>();
+    card.story_spotlight    = element["story_spotlight"].get<bool>();
 
     return card;
 }
