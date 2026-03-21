@@ -42,7 +42,6 @@ struct PrintedCard {
     bool booster;
     bool reserved;
     bool variation;
-    bool game_changer;
     bool story_spotlight;
     bool highres_image;
 

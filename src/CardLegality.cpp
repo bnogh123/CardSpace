@@ -23,7 +23,7 @@ static const std::unordered_map<std::string, Format> format_map = {
     {"timeless",  Format::timeless}
 };
 
-LegalityEncoding encode_legalities(const nlohmann::json &legalities_obj) {
+LegalityEncoding encode_legalities(const nlohmann::json &legalities_obj, const bool game_changer) {
     LegalityEncoding enc{0, false};
     
     // determine the baseline
@@ -57,6 +57,17 @@ LegalityEncoding encode_legalities(const nlohmann::json &legalities_obj) {
                 uint8_t bits    = static_cast<uint8_t>(lst);
                 enc.exceptions |= (bits << shift);  
             }
+        }
+    }
+
+    // force commander to restricted for game changer cards
+    if (game_changer) {
+        auto found = format_map.find("commander");
+        if (found != format_map.end()) {
+            uint8_t shift = static_cast<uint8_t>(found->second);
+            // clear existing 2 bits first, then set restricted
+            enc.exceptions &= ~(0b11 << shift);
+            enc.exceptions |= (static_cast<uint8_t>(LegalityStatus::restricted) << shift);
         }
     }
 
