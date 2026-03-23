@@ -35,7 +35,7 @@ LegalityEncoding encode_legalities(const nlohmann::json &legalities_obj, const b
         std::string s = status.get<std::string>();
         if (s == "legal") legal_count++;
     }
-    enc.baseline = (legal_count >= TRACKED_FORMATS / 2);
+    enc.baseline = (legal_count >= (TRACKED_FORMATS / 2));
 
     // encode the exceptions
     for (const auto& [format, status] : legalities_obj.items()) {
