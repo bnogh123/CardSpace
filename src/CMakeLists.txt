@@ -12,6 +12,8 @@ add_library(cardspace_core
   transformer.cpp           # cleans / normalises fields (mana cost, legalities…)
   loader.cpp                # writes transformed records to the data warehouse
   CardType.cpp              # encodes / de-encodes supertype and type typeline
+  CardColor.cpp             # encodes / de-encodes card color and color identity
+  CardLegality.cpp          # encodes / de-encodes per-format legality status
 
   # Data warehouse layer
   warehouse.cpp             # schema management and bulk insert helpers

@@ -57,8 +57,14 @@ static std::variant<BasePT, CDAPT, NegativePT> parse_pt(const std::string& raw_p
     bool power_cda      = (raw_power.find('*')     != std::string::npos);
     bool toughness_cda  = (raw_toughness.find('*') != std::string::npos);
 
+    
+
     uint16_t p = 0, t = 0;
-    try { p = static_cast<uint16_t>(std::stoi(raw_power));     } catch (...) {}
+
+    std::string abs_power = (negative_power && raw_power.size() > 1)
+        ? raw_power.substr(1)
+        : raw_power;
+    try { p = static_cast<uint16_t>(std::stoi(abs_power)); } catch (...) {}
     try { t = static_cast<uint16_t>(std::stoi(raw_toughness)); } catch (...) {}
 
     if (negative_power)
@@ -82,10 +88,10 @@ Card parse_oracle_card(const nlohmann::json& element) {
     // --- guaranteed oracle fields ---
     card.o_id          = element["oracle_id"].get<std::string>();
     card.name          = element["name"].get<std::string>();
-    card.mana_cost     = element["mana_cost"].get<std::string>();
+    card.mana_cost     = element.value("mana_cost", "");
     card.cmc           = element["cmc"].get<uint16_t>();
     card.type_line_raw = element["type_line"].get<std::string>();
-    card.oracle_text   = element["oracle_text"].get<std::string>();
+    card.oracle_text   = element.value("oracle_text", "");
     card.type          = encode_type_line(card.type_line_raw);
     card.color         = encode_color(element["colors"]);
     card.color_identity = encode_color(element["color_identity"]);
@@ -122,7 +128,7 @@ PrintedCard parse_printed_card(const nlohmann::json& element) {
     card.layout  = parse_layout(element["layout"].get<std::string>());
     card.usd_price          = element["prices"]["usd"].is_null()
         ? std::nullopt
-        : std::optional<double>(element["prices"]["usd"].get<double>());
+        : std::optional<double>(std::stod(element["prices"]["usd"].get<std::string>()));
     card.set                = element["set"].get<std::string>();
     card.set_name           = element["set_name"].get<std::string>();
     card.collector_number   = element["collector_number"].get<std::string>();

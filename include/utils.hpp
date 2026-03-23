@@ -22,4 +22,4 @@ std::vector<std::string> extract_braced(const std::string& text);
   * @param value 8 byte unsigned int to check if is prime
   * @return bool True iff the number is prime
   */
-bool is_prime(uint64_t value);
+bool is_prime(const uint64_t value);

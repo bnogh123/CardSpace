@@ -31,7 +31,7 @@ std::vector<std::string> extract_braced(const std::string& text) {
 /* 
 input: value
 returns true if the value is prime and false otherwise */
-bool is_prime (const uint64_t& value) {
+bool is_prime(uint64_t value) {
     uint16_t cnt = 0;
     bool is_prime;
 

@@ -84,3 +84,7 @@ ColorEncoding encode_color(const nlohmann::json& json){
 
     return result;
 }
+
+uint16_t ColorEncoding::raw() const {
+    return value;
+}
