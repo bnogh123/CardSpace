@@ -49,7 +49,7 @@ struct LegalityEncoding {
  * @param legalities_obj The "legalities" field from a Scryfall card element
  * @return Populated LegalityEncoding struct
  */
-LegalityEncoding encode_legalities(const nlohmann::json& legalities_obj, const bool game_changer);
+LegalityEncoding encode_legalities(const nlohmann::json& legalities_obj, const bool game_changer=false);
 
 /**
  * @brief Decode the legality status of a single format from an encoding
