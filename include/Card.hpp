@@ -40,8 +40,7 @@ struct NegativePT {
  * more of an abstract class than anything else, seeing how 
  * it can't really do anything by itself; beyond simplification
  * we need a specific PrintedCard object to make commentary on set
- * or monetary value as it contributes to a decks
-*/
+ * or monetary value as it contributes to a deck */
 struct Card {
     // immutable string aspects
     std::string o_id;           // stable oracle ID

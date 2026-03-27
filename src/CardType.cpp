@@ -45,6 +45,10 @@ bool TypeEncoding::is_multitype() const{
     return !is_prime(value) && value != 1;
 }
 
+uint64_t TypeEncoding::raw() const{
+    return value;
+}
+
 TypeEncoding encode_type_line(const std::string& type_line){
     TypeEncoding result;    // starts with value = 1
 

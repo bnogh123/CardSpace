@@ -78,7 +78,7 @@ enum PrintFlagBit : uint16_t {
 struct TransformedPrint {
     // --- identity ---
     std::string id;
-    std::string o_id;
+    std::string o_id; // foreign key to Card.o_id
 
     // --- set metadata ---
     std::string set;
@@ -121,8 +121,30 @@ struct TransformedPrint {
 //  Public API
 // ============================================================
 
+/** 
+ * @brief transforms Card into TransformedCard object
+ * @param card Card to be transformed & flattened (passed by reference)
+ * @return TransformedCard object representing the given Card 
+ */
 TransformedCard  transform_card(const Card& card);
+
+/** 
+ * @brief transforms PrintedCard into TransformedPrint object
+ * @param print PrintedCard to be transformed & flattened (passed by reference)
+ * @return TransformedPrint object representing the given PrintedCard 
+ */
 TransformedPrint transform_print(const PrintedCard& print);
 
+/** 
+ * @brief transforms vector of Card objects to a vector of TransformedCard
+ * @param cards vector of Card objects to be prepared for warehousing
+ * @return vector of flattened TransformedCard objects for warehousing
+ */
 std::vector<TransformedCard>  transform_cards(const std::vector<Card>& cards);
+
+/** 
+ * @brief transforms vector of PrintedCard to a vector of TransformedPrint
+ * @param prints vector of PrintedCard objects to be prepared for warehousing
+ * @return vector of flattened TransformedPrint objects for warehousing
+ */
 std::vector<TransformedPrint> transform_prints(const std::vector<PrintedCard>& prints);

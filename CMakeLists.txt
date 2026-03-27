@@ -71,6 +71,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(fmtlib)
 # Links via fmt::fmt
 
+# --- SQLite -------------------------------------------------------------------
+find_package(SQLite3 REQUIRED)
+# Links via SQLite3::SQLite3
+
+
 # ==============================================================================
 # Project subdirectories
 # ==============================================================================
