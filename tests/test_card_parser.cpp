@@ -3,6 +3,7 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 #include <string>
+#include <iostream>
 #include "Card.hpp"
 #include "PrintedCard.hpp"
 #include "card_parser.hpp"
@@ -433,7 +434,9 @@ TEST_CASE("ScryfallClient + parse_oracle_card: live Lightning Bolt", "[live][int
         "https://api.scryfall.com/cards/named?exact=Lightning+Bolt&format=json"
     );
 
-    auto j = nlohmann::json::parse(raw);
+    auto j = json::parse(raw);
+
+    std::cout << j.dump(2) << std::endl;
 
     // The /cards/named endpoint returns a printing object, not an oracle object.
     // It has oracle_id but may be missing mana_cost on some layouts — use value()

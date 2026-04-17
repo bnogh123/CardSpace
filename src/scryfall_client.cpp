@@ -21,19 +21,32 @@ This function uses curl easy options along with error checking
 at the beginning of the init as well as at the end to make sure
 there are no curl errors*/
 std::string ScryfallClient::fetch_bulk_data(const std::string& url){
-    // init variables
+    // Init variables
     CURL* handle = curl_easy_init();
     std::string response;
     
-    // error checking for initialization
+    // Error checking for initialization
     if(!handle){
         throw std::runtime_error("failed to initialize curl handle");
     }
 
+    // Set the URL
     curl_easy_setopt(handle, CURLOPT_URL,               url.c_str());
+
+    // Follow redirects
     curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION,    1L);
+
+    // Set write callback function
     curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION,     write_callback);
     curl_easy_setopt(handle, CURLOPT_WRITEDATA,         &response);
+
+    // Add User-Agent header
+    curl_easy_setopt(handle, CURLOPT_USERAGENT, "CardSpace/0.1");
+
+    // Add Accept header
+    curl_easy_setopt(handle, CURLOPT_HTTPHEADER, 
+        curl_slist_append(nullptr, "Accept: application/json;q=0.9,*/*;q=0.8"));
+    
     CURLcode res = curl_easy_perform(handle);
     curl_easy_cleanup(handle);
 
