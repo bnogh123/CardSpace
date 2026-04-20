@@ -45,7 +45,7 @@ std::string ScryfallClient::fetch_bulk_data(const std::string& url){
 
     // Add Accept header
     curl_easy_setopt(handle, CURLOPT_HTTPHEADER, 
-        curl_slist_append(nullptr, "Accept: application/json;q=0.9,*/*;q=0.8"));
+        curl_slist_append(nullptr, "Accept: */*"));
     
     CURLcode res = curl_easy_perform(handle);
     curl_easy_cleanup(handle);

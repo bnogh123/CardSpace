@@ -37,7 +37,7 @@ target_link_libraries(cardspace_core
   PRIVATE
     CURL::libcurl                 # HTTP — implementation detail only
     fmt::fmt                      # formatting / logging — implementation detail
-    SQLite::SQLite3              # Warehousing capabilities
+    SQLite::SQLite3               # Warehousing capabilities
 )
 
 # Require C++17 for std::filesystem, structured bindings, etc.
