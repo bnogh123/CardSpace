@@ -1,3 +1,5 @@
+// include/loader.hpp
+
 #pragma once
 #include "transformer.hpp"
 #include <sqlite3.h>
@@ -70,10 +72,26 @@ public:
      */
     void load_prints(const std::vector<TransformedPrint>& prints);
 
+    /**
+     * @brief Query a card by its Oracle ID.
+     * @param o_id Oracle ID of the card to query.
+     * @return Optional TransformedCard object if found, nullopt otherwise.
+     */
+    std::optional<TransformedCard> get_card_by_o_id(const std::string& o_id) const;
+
+    /**
+     * @brief Query a printed card by its Scryfall ID.
+     * @param id Scryfall ID of the printed card to query.
+     * @return Optional TransformedPrint object if found, nullopt otherwise.
+     */
+    std::optional<TransformedPrint> get_print_by_id(const std::string& id) const;
+
 private:
     sqlite3*      db_          = nullptr;
     sqlite3_stmt* stmt_card_   = nullptr;
     sqlite3_stmt* stmt_print_  = nullptr;
+    sqlite3_stmt* stmt_query_card_ = nullptr;
+    sqlite3_stmt* stmt_query_print_ = nullptr;
 
     void prepare_statements();
     void finalize_statements();

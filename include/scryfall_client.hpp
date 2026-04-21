@@ -18,5 +18,5 @@ public:
  *
  * note that the string is not parsed yet but just a lump sum string
  */
-    std::string fetch_bulk_data(const std::string& url);
+   std::string fetch_bulk_data(const std::string& url);
 };
